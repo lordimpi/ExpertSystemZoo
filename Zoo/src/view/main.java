@@ -1,5 +1,10 @@
 package view;
 
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.clipsrules.jni.*;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,8 +19,23 @@ public class main extends javax.swing.JFrame {
     /**
      * Creates new form main
      */
+    private Environment clips;
+    protected CaptureRouter theRouter;
+
     public main() {
         initComponents();
+
+        //initialize clips
+        clips = new Environment();
+        theRouter = new CaptureRouter(clips, new String[]{Router.STDOUT,
+            Router.STDERR,
+            Router.STDWRN});
+        try {
+            clips.load("zoo.clp");
+        } catch (CLIPSLoadException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
