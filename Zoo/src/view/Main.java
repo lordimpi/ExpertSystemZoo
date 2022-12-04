@@ -7,6 +7,7 @@ package view;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import net.sf.clipsrules.jni.CLIPSLoadException;
 import net.sf.clipsrules.jni.CaptureRouter;
 import net.sf.clipsrules.jni.Environment;
@@ -23,10 +24,17 @@ public class Main extends javax.swing.JFrame {
      */
     private Environment clips;
     protected CaptureRouter theRouter;
+    private DefaultListModel modelo = new DefaultListModel();
 
     public Main() {
         initComponents();
+        setLocationRelativeTo(null);
 
+        List<String> caracteristicas = Caracteristicas.cargarCaracteristicas();
+        caracteristicas.sort(String.CASE_INSENSITIVE_ORDER);
+        modelo.addAll(caracteristicas);
+
+        jLCaracteristicas.setModel(modelo);
         //initialize clips
         clips = new Environment();
         theRouter = new CaptureRouter(clips, new String[]{Router.STDOUT,
@@ -47,21 +55,20 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jLCaracteristicas = new javax.swing.JList<>();
         btnPredecirAniaml = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        jLCaracteristicas.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jList1.setAutoscrolls(false);
-        jList1.setFixedCellHeight(30);
-        jList1.setFixedCellWidth(82);
-        jList1.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
-        jScrollPane1.setViewportView(jList1);
+        jLCaracteristicas.setFixedCellHeight(35);
+        jLCaracteristicas.setFixedCellWidth(120);
+        jLCaracteristicas.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
+        jScrollPane1.setViewportView(jLCaracteristicas);
 
         btnPredecirAniaml.setLabel("Predecir Animal");
         btnPredecirAniaml.addActionListener(new java.awt.event.ActionListener() {
@@ -74,14 +81,15 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnPredecirAniaml)
-                .addGap(214, 214, 214))
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(298, 298, 298)
+                        .addComponent(btnPredecirAniaml))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,8 +106,24 @@ public class Main extends javax.swing.JFrame {
 
     private void btnPredecirAniamlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPredecirAniamlActionPerformed
 
-        List<String> list1 = jList1.getSelectedValuesList();
-        System.out.println(list1);
+        try {
+            clips.reset();
+            List<String> ElementosSeleccionados = jLCaracteristicas.getSelectedValuesList();
+            for (String elemento : ElementosSeleccionados) {
+                System.out.println("(assert (" + elemento + " s))");
+                clips.eval("(assert (" + elemento + " s))");
+            }
+
+            clips.run();
+            String animal = theRouter.getOutput();
+            System.out.println("Output: " + animal);
+            theRouter.clear();
+            clips.reset();
+
+        } catch (Exception e) {
+            System.out.println("clips.integration.ClipsInterface.PredictActionPerformed()");
+            clips.deleteRouter(theRouter);
+        }
 
     }//GEN-LAST:event_btnPredecirAniamlActionPerformed
 
@@ -140,7 +164,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPredecirAniaml;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jLCaracteristicas;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

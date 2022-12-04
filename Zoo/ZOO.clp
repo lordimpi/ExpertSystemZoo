@@ -147,7 +147,7 @@
 
 (defrule esHerbivoro3 "identificar herbivoro (3)"
     (come_plantas ?x)
-    (pezuñas ?x)
+    (pezunias ?x)
 =>
     (assert (herbivoro ?x))
 )
@@ -162,7 +162,7 @@
 (defrule esHerbivoro5 "identificar herbivoro (5)"
     (come_plantas ?x)
     (rumiante ?x)
-    (pezuñas ?x)
+    (pezunias ?x)
 =>
     (assert (herbivoro ?x))
 )
@@ -184,7 +184,7 @@
 
 (defrule esHerbivoro8 "identificar herbivoro (8)"
     (come_plantas ?x)
-    (pezuñas ?x)
+    (pezunias ?x)
     (mamifero ?x)
 =>
     (assert (herbivoro ?x))
@@ -201,7 +201,7 @@
 (defrule esHerbivoro10 "identificar herbivoro (10)"
     (come_plantas ?x)
     (rumiante ?x)
-    (pezuñas ?x)
+    (pezunias ?x)
     (mamifero ?x)
 =>
     (assert (herbivoro ?x))
@@ -217,7 +217,7 @@
     (patas_largas ?x)
     (cuello_largo ?x)
     (manchas_oscuras ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
 =>
     (assert (jirafa ?x))
     (printout t "jirafa")
@@ -228,7 +228,7 @@
     (mamifero ?x)
     (color_leonado ?x)
     (manchas_oscuras ?x)
-    (tamaño_mediano ?x)
+    (tamanio_mediano ?x)
 =>
     (assert (leopardo ?x))
     (printout t "leopardo")
@@ -239,7 +239,7 @@
     (no_vuela ?x)
     (nada ?x)
     (color_blanco_negro ?x)
-    (tamaño_pequeño ?x)
+    (tamanio_pequenio ?x)
 =>
     (assert (pinguino ?x))
     (printout t "pinguino")
@@ -247,8 +247,8 @@
 
 (defrule esAlbatros "identificar albatros"
     (ave ?x)
-    (vuela_bien ?x)
-    (tamaño_pequeño ?x)
+    (alas_largas ?x)
+    (tamanio_pequenio ?x)
 =>
     (assert (albatros ?x))
     (printout t "albatros")
@@ -261,7 +261,7 @@
     (cuello_largo ?x)
     (color_blanco_negro ?x)
     (herbivoro ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
 =>
     (assert (avestruz ?x))
     (printout t "avestruz")
@@ -272,7 +272,7 @@
     (mamifero ?x)
     (color_leonado ?x)
     (franjas_negras ?x)
-    (tamaño_mediano ?x)
+    (tamanio_mediano ?x)
 =>
     (assert (tigre ?x))
     (printout t "tigre")
@@ -283,7 +283,7 @@
     (mamifero ?x)
     (color_gris ?x)
     (marcas_en_cara ?x)
-    (tamaño_pequeño ?x)
+    (tamanio_pequenio ?x)
 =>
     (assert (mapache ?x))
     (printout t "mapache")
@@ -294,7 +294,7 @@
     (mamifero ?x)
     (color_blanco ?x)
     (franjas_negras ?x)
-    (tamaño_mediano ?x)
+    (tamanio_mediano ?x)
 =>
     (assert (cebra ?x))
     (printout t "cebra")
@@ -305,7 +305,7 @@
     (mamifero ?x)
     (color_gris ?x)
     (orejas_grandes ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
     (tiene_cuernos ?x)
 =>
     (assert (elefante ?x))
@@ -316,7 +316,7 @@
     (ave ?x)
     (plumas_largas ?x)
     (color_azul_verde ?x)
-    (tamaño_mediano ?x)
+    (tamanio_mediano ?x)
     (no_vuela ?x)
 =>
     (assert (pavoReal ?x))
@@ -327,7 +327,7 @@
     (mamifero ?x)
     (herbivoro ?x)
     (nada ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
 =>
     (assert (hipopotamo ?x))
     (printout t "hipopotamo")
@@ -337,7 +337,7 @@
     (carnivoro ?x)
     (nada ?x)
     (escamas ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
 =>
     (assert (cocodrilo ?x))
     (printout t "cocodrilo")
@@ -348,7 +348,7 @@
     (nada ?x)
     (escamas ?x)
     (se_arrastra ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
 =>
     (assert (anaconda ?x))
     (printout t "anaconda")
@@ -358,7 +358,7 @@
     (ave ?x)
     (carnivoro ?x)
     (es_nocturno ?x)
-    (tamaño_mediano ?x)
+    (tamanio_mediano ?x)
 =>
     (assert (buho ?x))
     (printout t "buho")
@@ -368,7 +368,7 @@
     (mamifero ?x)
     (carnivoro ?x)
     (es_nocturno ?x)
-    (tamaño_pequeño ?x)
+    (tamanio_pequenio ?x)
 =>
     (assert (murcielago ?x))
     (printout t "murcielago")
@@ -376,9 +376,9 @@
 
 (defrule esIguana "identificar iguana"
     (herbivoro ?x)
-    (tiene_escamas ?x)
+    (escamas ?x)
     (color_verde ?x)
-    (tamaño_pequeño ?x)
+    (tamanio_pequenio ?x)
 =>
     (assert (iguana ?x))
     (printout t "iguana")
@@ -389,7 +389,7 @@
     (mamifero ?x)
     (nada ?x)
     (color_marron ?x)
-    (tamaño_pequeño ?x)
+    (tamanio_pequenio ?x)
 =>
     (assert (nutria ?x))
     (printout t "nutria")
@@ -399,7 +399,7 @@
     (carnivoro ?x)
     (ave ?x)
     (color_negro ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
 =>
     (assert (condor ?x))
     (printout t "condor")
@@ -410,7 +410,7 @@
     (mamifero ?x)
     (color_gris ?x)
     (tiene_cuernos ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
 =>
     (assert (rinoceronte ?x))
     (printout t "rinoceronte")
@@ -420,7 +420,7 @@
     (carnivoro ?x)
     (mamifero ?x)
     (color_negro ?x)
-    (tamaño_mediano ?x)
+    (tamanio_mediano ?x)
 =>
     (assert (pantera ?x))
     (printout t "pantera")
@@ -431,7 +431,7 @@
     (mamifero ?x)
     (color_marron ?x)
     (tiene_cuernos ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
 =>
     (assert (alce ?x))
     (printout t "alce")
@@ -442,7 +442,7 @@
     (mamifero ?x)
     (color_blanco_negro ?x)
     (salta ?x)
-    (tamaño_pequeño ?x)
+    (tamanio_pequenio ?x)
 =>
     (assert (lemur ?x))
     (printout t "lemur")
@@ -453,7 +453,7 @@
     (mamifero ?x)
     (color_marron ?x)
     (salta ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
 =>
     (assert (canguro ?x))
     (printout t "canguro")
@@ -463,7 +463,7 @@
     (carnivoro ?x)
     (mamifero ?x)
     (color_leonado ?x)
-    (tamaño_grande ?x)
+    (tamanio_grande ?x)
 =>
     (assert (leon ?x))
     (printout t "leon")
@@ -473,7 +473,7 @@
     (herbivoro ?x)
     (ave ?x)
     (color_azul_verde ?x)
-    (tamaño_pequeño ?x)
+    (tamanio_pequenio ?x)
 =>
     (assert (colibri ?x))
     (printout t "colibri")
