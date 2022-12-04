@@ -110,7 +110,6 @@ public class Main extends javax.swing.JFrame {
             clips.reset();
             List<String> ElementosSeleccionados = jLCaracteristicas.getSelectedValuesList();
             for (String elemento : ElementosSeleccionados) {
-                System.out.println("(assert (" + elemento + " s))");
                 clips.eval("(assert (" + elemento + " s))");
             }
 
