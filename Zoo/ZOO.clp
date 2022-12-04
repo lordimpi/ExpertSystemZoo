@@ -2,68 +2,6 @@
 ;
 ; ESTUDIANTES: José Gregorio Narváez Alarcón, Santiago Acuña Obando.
 ;
-;;;********************************
-;;;* Definición de las plantilla  *
-;;;********************************
-
-(deftemplate animal "nombres animales"
-          (slot nombre)
-)
-
-;;;********************
-;;;* Hechos iniciales *
-;;;********************
-
-(assert (animal (nombre "Jirafa")))
-(assert (animal (nombre "Leopardo")))
-(assert (animal (nombre "Pinguino")))
-(assert (animal (nombre "Albatros")))
-(assert (animal (nombre "Avestruz")))
-(assert (animal (nombre "Tigre")))
-(assert (animal (nombre "Mapache")))
-(assert (animal (nombre "Cebra")))
-(assert (animal (nombre "Elefante")))
-(assert (animal (nombre "Leon")))
-(assert (animal (nombre "Puma")))
-(assert (animal (nombre "Ardilla")))
-(assert (animal (nombre "Oso Pardo")))
-(assert (animal (nombre "Hipopotamo")))
-(assert (animal (nombre "Chimpance")))
-(assert (animal (nombre "Lemur")))
-(assert (animal (nombre "Anaconda")))
-(assert (animal (nombre "Cocodrilo")))
-(assert (animal (nombre "Lobo")))
-(assert (animal (nombre "Rinoceronte")))
-(assert (animal (nombre "Ñu")))
-(assert (animal (nombre "Ñandu")))
-(assert (animal (nombre "Foca")))
-(assert (animal (nombre "Tortuga")))
-(assert (animal (nombre "Gavilan")))
-(assert (animal (nombre "Condor")))
-(assert (animal (nombre "Pavo Real")))
-(assert (animal (nombre "Coyote")))
-(assert (animal (nombre "Zorro")))
-(assert (animal (nombre "Aguila")))
-(assert (animal (nombre "Venado")))
-(assert (animal (nombre "Rana")))
-(assert (animal (nombre "Reno")))
-(assert (animal (nombre "Zarigueya")))
-(assert (animal (nombre "Ocelote")))
-(assert (animal (nombre "Jaguar")))
-(assert (animal (nombre "Hiena")))
-(assert (animal (nombre "Hamster")))
-(assert (animal (nombre "Tucan")))
-(assert (animal (nombre "Loro")))
-(assert (animal (nombre "Camello")))
-(assert (animal (nombre "Boa")))
-(assert (animal (nombre "Cobra")))
-(assert (animal (nombre "Nutria")))
-(assert (animal (nombre "Morsa")))
-(assert (animal (nombre "Alce")))
-(assert (animal (nombre "Bufalo")))
-(assert (animal (nombre "Buho")))
-(assert (animal (nombre "Iguana")))
-(assert (animal (nombre "Murcielago")))
 
 ;;;***************************
 ;;;*Definición de las Reglas *
