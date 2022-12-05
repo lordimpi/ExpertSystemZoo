@@ -14,9 +14,11 @@ import java.util.List;
 public class Caracteristicas {
 
     private static List<String> Caracteristicas = new ArrayList<String>();
+    private static List<String> Sabana = new ArrayList<String>();
 
     public Caracteristicas() {
         cargarCaracteristicas();
+        cargarSabana();
     }
 
     public static List<String> cargarCaracteristicas() {
@@ -61,5 +63,18 @@ public class Caracteristicas {
         Caracteristicas.add("color_negro");
         Caracteristicas.add("salta");
         return Caracteristicas;
+    }
+
+    public static List<String>  cargarSabana() {
+        Sabana.add("jirafa");
+        Sabana.add("leopardo");
+        Sabana.add("avestruz");
+        Sabana.add("cebra");
+        Sabana.add("jirafa");
+        Sabana.add("elefante");
+        Sabana.add("rinoceronte");
+        Sabana.add("leon");
+        
+        return Sabana;
     }
 }

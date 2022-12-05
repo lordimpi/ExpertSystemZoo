@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import net.sf.clipsrules.jni.CLIPSLoadException;
 import net.sf.clipsrules.jni.CaptureRouter;
 import net.sf.clipsrules.jni.Environment;
@@ -23,7 +24,9 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     private Environment clips;
+    private Environment clipsM;
     protected CaptureRouter theRouter;
+    protected CaptureRouter theRouterM;
     private DefaultListModel modelo = new DefaultListModel();
 
     public Main() {
@@ -40,8 +43,14 @@ public class Main extends javax.swing.JFrame {
         theRouter = new CaptureRouter(clips, new String[]{Router.STDOUT,
             Router.STDERR,
             Router.STDWRN});
+
+        clipsM = new Environment();
+        theRouterM = new CaptureRouter(clipsM, new String[]{Router.STDOUT,
+            Router.STDERR,
+            Router.STDWRN});
         try {
             clips.load("zoo.clp");
+            clipsM.load("m.clp");
         } catch (CLIPSLoadException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -108,17 +117,30 @@ public class Main extends javax.swing.JFrame {
 
         try {
             clips.reset();
+            clipsM.run();
+            clipsM.eval("(run)");
             List<String> ElementosSeleccionados = jLCaracteristicas.getSelectedValuesList();
             for (String elemento : ElementosSeleccionados) {
                 clips.eval("(assert (" + elemento + " s))");
             }
-
             clips.run();
             String animal = theRouter.getOutput();
-            System.out.println("Output: " + animal);
+            List<String> miLista = Caracteristicas.cargarSabana();
+            for (String item : miLista) {
+                if (item.equals(animal)) {
+                    this.setVisible(false);
+                    P2 p2 = new P2();
+                    p2.setVisible(true);
+                    p2.setLocationRelativeTo(null);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "El animal que usted busca es un " + animal);
+            if ("".equals(animal)) {
+                JOptionPane.showMessageDialog(null, "Seleccione mas caracteristicas");
+            }
+
             theRouter.clear();
             clips.reset();
-
         } catch (Exception e) {
             System.out.println("clips.integration.ClipsInterface.PredictActionPerformed()");
             clips.deleteRouter(theRouter);
