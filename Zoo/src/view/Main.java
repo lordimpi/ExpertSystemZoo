@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,19 +126,54 @@ public class Main extends javax.swing.JFrame {
             }
             clips.run();
             String animal = theRouter.getOutput();
-            List<String> miLista = Caracteristicas.cargarSabana();
-            for (String item : miLista) {
-                if (item.equals(animal)) {
-                    this.setVisible(false);
-                    P2 p2 = new P2();
-                    p2.setVisible(true);
-                    p2.setLocationRelativeTo(null);
-                }
-            }
+            List<String> miListaSabana = Caracteristicas.cargarSabana();
+            List<String> miListaSelvaTropical = Caracteristicas.cargarSelvaTropical();
+            List<String> miListaAcuatico = Caracteristicas.cargarEcosistemaAcuatico();
+            List<String> miListaMontania = Caracteristicas.cargarMontania();
+            
             JOptionPane.showMessageDialog(null, "El animal que usted busca es un " + animal);
             if ("".equals(animal)) {
                 JOptionPane.showMessageDialog(null, "Seleccione mas caracteristicas");
             }
+            
+            if(miListaSabana.contains(animal))
+            {
+                List<Integer> verificar = new ArrayList<Integer>();
+                /*this.setVisible(false);
+                P2 p2 = new P2();
+                p2.setVisible(true);
+                p2.setLocationRelativeTo(null);*/
+                JOptionPane.showMessageDialog(null, "A continuación verificaremos si usted vive en una zona adecuada para obtener el animal que desea.");
+                verificar.add(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de clima caliente"));
+                verificar.add(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de llanura"));
+                verificar.add(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de suelo poco fértil y seco"));
+                verificar.add(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de poca lluvia en el año"));
+                System.out.println(verificar);
+                for (Integer item : verificar) {
+                    if(item!=0)
+                    {
+                        System.out.println("No cumple");
+                        break;
+                    }
+                }
+            }
+            
+            if(miListaSelvaTropical.contains(animal))
+            {
+                
+            }
+            
+            if(miListaAcuatico.contains(animal))
+            {
+                
+            }
+            
+            if(miListaMontania.contains(animal))
+            {
+                
+            }
+            
+            
 
             theRouter.clear();
             clips.reset();
