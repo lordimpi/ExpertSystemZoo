@@ -15,10 +15,16 @@ public class Caracteristicas {
 
     private static List<String> Caracteristicas = new ArrayList<String>();
     private static List<String> Sabana = new ArrayList<String>();
+    private static List<String> SelvaTropical = new ArrayList<String>();
+    private static List<String> EcosistemaAcuatico = new ArrayList<String>();
+    private static List<String> Montania = new ArrayList<String>();
 
     public Caracteristicas() {
         cargarCaracteristicas();
         cargarSabana();
+        cargarSelvaTropical();
+        cargarEcosistemaAcuatico();
+        cargarMontania();
     }
 
     public static List<String> cargarCaracteristicas() {
@@ -27,14 +33,13 @@ public class Caracteristicas {
         Caracteristicas.add("tiene_plumas");
         Caracteristicas.add("vuela");
         Caracteristicas.add("pone_huevos");
-        Caracteristicas.add("come_carne");
         Caracteristicas.add("mamifero");
         Caracteristicas.add("garras");
         Caracteristicas.add("dientes_agudos");
         Caracteristicas.add("come_plantas");
         Caracteristicas.add("pezunias");
         Caracteristicas.add("rumiante");
-        Caracteristicas.add("herviboro");
+        Caracteristicas.add("herbivoro");
         Caracteristicas.add("patas_largas");
         Caracteristicas.add("cuello_largo");
         Caracteristicas.add("manchas_oscuras");
@@ -62,19 +67,54 @@ public class Caracteristicas {
         Caracteristicas.add("color_marron");
         Caracteristicas.add("color_negro");
         Caracteristicas.add("salta");
+        Caracteristicas.add("color_blanco");
         return Caracteristicas;
     }
 
     public static List<String>  cargarSabana() {
         Sabana.add("jirafa");
-        Sabana.add("leopardo");
         Sabana.add("avestruz");
         Sabana.add("cebra");
-        Sabana.add("jirafa");
         Sabana.add("elefante");
         Sabana.add("rinoceronte");
         Sabana.add("leon");
+        Sabana.add("canguro");
+        Sabana.add("AVESTRUZ_2");
         
         return Sabana;
+    }
+    
+    public static List<String>  cargarSelvaTropical() {
+        SelvaTropical.add("leopardo");
+        SelvaTropical.add("albatros");
+        SelvaTropical.add("tigre");
+        SelvaTropical.add("mapache");
+        SelvaTropical.add("anaconda");
+        SelvaTropical.add("pavo real");
+        SelvaTropical.add("iguana");
+        SelvaTropical.add("pantera");
+        SelvaTropical.add("lemur");
+        SelvaTropical.add("colibri");
+        
+        return SelvaTropical;
+    }
+    
+    public static List<String>  cargarEcosistemaAcuatico() {
+        EcosistemaAcuatico.add("cocodrilo");
+        EcosistemaAcuatico.add("nutria");
+        EcosistemaAcuatico.add("anaconda");
+        EcosistemaAcuatico.add("hipopotamo");
+        EcosistemaAcuatico.add("pinguino");
+        
+        return EcosistemaAcuatico;
+    }
+    
+    public static List<String>  cargarMontania() {
+        Montania.add("condor");
+        Montania.add("buho");
+        Montania.add("murcielago");
+        Montania.add("alce");
+        
+        return Montania;
     }
 }

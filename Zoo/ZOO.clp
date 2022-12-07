@@ -267,6 +267,19 @@
     (printout t "avestruz")
 )
 
+(defrule esAvestruz2 "identificar avestruz2"
+    (ave ?x)
+    (no_vuela ?x)
+    (patas_largas ?x)
+    (color_blanco_negro ?x)
+    (plumas_largas ?x)
+    (pone_huevos ?x)
+    (tiene_plumas ?x)
+=>
+    (assert (avestruz ?x))
+    (printout t "AVESTRUZ_2")
+)
+
 (defrule esTigre "identificar tigre"
     (carnivoro ?x)
     (mamifero ?x)
@@ -290,7 +303,7 @@
 )
 
 (defrule esCebra "identificar cebra"
-    (herviboro ?x)
+    (herbivoro ?x)
     (mamifero ?x)
     (color_blanco ?x)
     (franjas_negras ?x)
@@ -301,12 +314,11 @@
 )
 
 (defrule esElefante "identificar elefante"
-    (herviboro ?x)
+    (herbivoro ?x)
     (mamifero ?x)
     (color_gris ?x)
     (orejas_grandes ?x)
     (tamanio_grande ?x)
-    (tiene_cuernos ?x)
 =>
     (assert (elefante ?x))
     (printout t "elefante")
@@ -345,7 +357,6 @@
 
 (defrule esAnaconda "identificar anaconda"
     (carnivoro ?x)
-    (nada ?x)
     (escamas ?x)
     (se_arrastra ?x)
     (tamanio_grande ?x)
@@ -477,4 +488,47 @@
 =>
     (assert (colibri ?x))
     (printout t "colibri")
+)
+
+
+
+
+
+
+(defrule habitatSabana
+    (clima_caliente ?x)
+    (llanura ?x)
+    (poca_lluvia ?x)
+    (suelo_seco ?x)
+=>
+    (assert (viveEnSabana ?x))
+    (printout t "Usted vive en un habitat apropiado para comprar el animal seleccionado, y para ello debe tener los siguientes cuidados:()-Proveer un recipiente lo suficientemente grande con mucha agua.()-Espacio amplio para su libre locomocion.()-Mantener a niños alejados de la zona donde se encuentre el animal.")
+)
+
+(defrule habitatSelvaTropical
+    (bosque_denso ?x)
+    (clima_templado ?x)
+    (vegetacion_abundante ?x)
+    (bastante_lluvia ?x)
+=>
+    (assert (viveEnSelvaTropical ?x))
+    (printout t "Usted vive en un habitat apropiado para comprar el animal seleccionado y para ello debe tener los siguientes cuidados:()-Proveer un lugar boscoso y con abundante fauna y flora.()-Mantener el lugar restringido para cazadores furtivos.()-Mantener el lugar restringido la tala de arboles.")
+)
+
+(defrule habitatEcosistemaAcuatico
+    (alta_humedad ?x)
+    (clima_templado ?x)
+    (vegetacion_acuatica ?x)
+=>
+    (assert (viveEnZonaAcuatica ?x))
+    (printout t "Usted vive en un habitat apropiado para comprar el animal seleccionado y para ello debe tener los siguientes cuidados:()-Proveer un lugar donde haya agua abundante, rios o lagos.()-Evitar zonas de desechos industriales.()-Probhibir el acceso a bañistas")
+)
+
+(defrule habitatMontania
+    (cumbre ?x)
+    (altitud ?x)
+    (clima_frio ?x)
+=>
+    (assert (viveEnMontania ?x))
+    (printout t "Usted vive en un habitat apropiado para comprar el animal seleccionado y para ello debe tener los siguientes cuidados:()-Evitar zonas de baja altitud.")
 )

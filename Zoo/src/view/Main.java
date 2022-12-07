@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,9 +25,7 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     private Environment clips;
-    private Environment clipsM;
     protected CaptureRouter theRouter;
-    protected CaptureRouter theRouterM;
     private DefaultListModel modelo = new DefaultListModel();
 
     public Main() {
@@ -43,14 +42,8 @@ public class Main extends javax.swing.JFrame {
         theRouter = new CaptureRouter(clips, new String[]{Router.STDOUT,
             Router.STDERR,
             Router.STDWRN});
-
-        clipsM = new Environment();
-        theRouterM = new CaptureRouter(clipsM, new String[]{Router.STDOUT,
-            Router.STDERR,
-            Router.STDWRN});
         try {
             clips.load("zoo.clp");
-            clipsM.load("m.clp");
         } catch (CLIPSLoadException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -117,27 +110,182 @@ public class Main extends javax.swing.JFrame {
 
         try {
             clips.reset();
-            clipsM.run();
-            clipsM.eval("(run)");
             List<String> ElementosSeleccionados = jLCaracteristicas.getSelectedValuesList();
             for (String elemento : ElementosSeleccionados) {
                 clips.eval("(assert (" + elemento + " s))");
             }
             clips.run();
             String animal = theRouter.getOutput();
-            List<String> miLista = Caracteristicas.cargarSabana();
-            for (String item : miLista) {
-                if (item.equals(animal)) {
-                    this.setVisible(false);
-                    P2 p2 = new P2();
-                    p2.setVisible(true);
-                    p2.setLocationRelativeTo(null);
-                }
-            }
+            List<String> miListaSabana = Caracteristicas.cargarSabana();
+            List<String> miListaSelvaTropical = Caracteristicas.cargarSelvaTropical();
+            List<String> miListaAcuatico = Caracteristicas.cargarEcosistemaAcuatico();
+            List<String> miListaMontania = Caracteristicas.cargarMontania();
+            
             JOptionPane.showMessageDialog(null, "El animal que usted busca es un " + animal);
+            JFanimal mostrarAnimal = new JFanimal(animal);
+            mostrarAnimal.setVisible(true);
+            //mostrarAnimal.setLocationRelativeTo(null);
             if ("".equals(animal)) {
                 JOptionPane.showMessageDialog(null, "Seleccione mas caracteristicas");
             }
+            
+            List<String> ElementosHabitat = new ArrayList<String>();
+            
+            if(miListaSabana.contains(animal))
+            {
+                JOptionPane.showMessageDialog(null, "A continuación verificaremos si usted vive en una zona adecuada para obtener el animal que desea.");
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de clima caliente")==0)
+                {
+                    ElementosHabitat.add("clima_caliente");
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de llanura")==0)
+                {
+                    ElementosHabitat.add("llanura");
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de poca lluvia en el año")==0)
+                {
+                    ElementosHabitat.add("poca_lluvia");
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de suelo poco fértil y seco")==0)
+                {
+                    ElementosHabitat.add("suelo_seco");
+                }
+                
+                for (String elemento : ElementosHabitat) {
+                clips.eval("(assert (" + elemento + " s))");
+                }
+                
+                theRouter = new CaptureRouter(clips, new String[]{Router.STDOUT,
+                Router.STDERR,
+                Router.STDWRN});
+                clips.run();
+                String respuesta = theRouter.getOutput();
+                respuesta = respuesta.replace("()", "\n");
+                if ("".equals(respuesta)) {
+                    JOptionPane.showMessageDialog(null, "Usted no vive en un habitat adecuado para tener el animal seleccionado.");
+                }else
+                {
+                    JOptionPane.showMessageDialog(null, respuesta);
+                }
+            }
+            
+            if(miListaSelvaTropical.contains(animal))
+            {
+                JOptionPane.showMessageDialog(null, "A continuación verificaremos si usted vive en una\nzona adecuada para obtener el animal que desea.");
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de bosque denso")==0)
+                {
+                    ElementosHabitat.add("bosque_denso");
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de clima templado")==0)
+                {
+                    ElementosHabitat.add("clima_templado");
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de vegetación abundante")==0)
+                {
+                    ElementosHabitat.add("vegetacion_abundante");
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de bastante lluvia")==0)
+                {
+                    ElementosHabitat.add("bastante_lluvia");
+                }
+                
+                for (String elemento : ElementosHabitat) {
+                clips.eval("(assert (" + elemento + " s))");
+                }
+                
+                theRouter = new CaptureRouter(clips, new String[]{Router.STDOUT,
+                Router.STDERR,
+                Router.STDWRN});
+                clips.run();
+                String respuesta = theRouter.getOutput();
+                respuesta = respuesta.replace("()", "\n");
+                if ("".equals(respuesta)) {
+                    JOptionPane.showMessageDialog(null, "Usted no vive en un habitat adecuado para tener el animal seleccionado.");
+                }else
+                {
+                    JOptionPane.showMessageDialog(null, respuesta);
+                }
+            }
+            
+            if(miListaAcuatico.contains(animal))
+            {
+                JOptionPane.showMessageDialog(null, "A continuación verificaremos si usted vive en una\nzona adecuada para obtener el animal que desea.");
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona cercana a un rio?")==0)
+                {
+                    ElementosHabitat.add("rio");
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de alta humedad")==0)
+                {
+                    ElementosHabitat.add("alta_humedad");
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de vegetación acuática")==0)
+                {
+                    ElementosHabitat.add("vegetacion_acuatica");
+                }
+                
+                for (String elemento : ElementosHabitat) {
+                clips.eval("(assert (" + elemento + " s))");
+                }
+                
+                theRouter = new CaptureRouter(clips, new String[]{Router.STDOUT,
+                Router.STDERR,
+                Router.STDWRN});
+                clips.run();
+                String respuesta = theRouter.getOutput();
+                respuesta = respuesta.replace("()", "\n");
+                if ("".equals(respuesta)) {
+                    JOptionPane.showMessageDialog(null, "Usted no vive en un habitat adecuado para tener el animal seleccionado.");
+                }else
+                {
+                    JOptionPane.showMessageDialog(null, respuesta);
+                }
+            }
+            
+            if(miListaMontania.contains(animal))
+            {
+                JOptionPane.showMessageDialog(null, "A continuación verificaremos si usted vive en una\nzona adecuada para obtener el animal que desea.");
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona cercana a una cumbre?")==0)
+                {
+                    ElementosHabitat.add("cumbre");
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de mucha altitud")==0)
+                {
+                    ElementosHabitat.add("altitud");
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Usted vive en una zona de clima frío")==0)
+                {
+                    ElementosHabitat.add("clima_frio");
+                }
+                
+                for (String elemento : ElementosHabitat) {
+                clips.eval("(assert (" + elemento + " s))");
+                }
+                
+                theRouter = new CaptureRouter(clips, new String[]{Router.STDOUT,
+                Router.STDERR,
+                Router.STDWRN});
+                clips.run();
+                String respuesta = theRouter.getOutput();
+                respuesta = respuesta.replace("()", "\n");
+                if ("".equals(respuesta)) {
+                    JOptionPane.showMessageDialog(null, "Usted no vive en un habitat adecuado para tener el animal seleccionado.");
+                }else
+                {
+                    JOptionPane.showMessageDialog(null, respuesta);
+                }
+            }
+            
+            mostrarAnimal.dispose();
 
             theRouter.clear();
             clips.reset();
@@ -145,7 +293,7 @@ public class Main extends javax.swing.JFrame {
             System.out.println("clips.integration.ClipsInterface.PredictActionPerformed()");
             clips.deleteRouter(theRouter);
         }
-
+    
     }//GEN-LAST:event_btnPredecirAniamlActionPerformed
 
     /**
